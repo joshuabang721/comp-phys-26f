@@ -1,0 +1,4 @@
+question_1_parameters_path = "homework-3\\config\\question_1\\question_1.toml"
+question_2_parameters_path = "homework-3\\config\\question_2\\question_2.toml"
+question_3_parameters_path = "homework-3\\config\\question_3\\question_3.toml"
+question_4_parameters_path = "homework-3\\config\\question_4\\question_4.toml"

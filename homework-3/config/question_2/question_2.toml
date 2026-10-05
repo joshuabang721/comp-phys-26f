@@ -1,0 +1,17 @@
+[simulation_parameters]
+number_of_walks = 10000
+number_of_steps = 1000
+
+[program_parameters]
+should_generate_statistics = true
+should_generate_figures = true
+sigma_data_path = "homework-3\\output\\question_2\\q2_sigma.json"
+
+[distribution_parameters]
+initial_position = 0.0
+step_length = 1.0
+random_step_dist_type = "TwoSidedExp"
+
+[figures_parameters]
+histogram_figure_path = "homework-3\\output\\question_2\\q2_figure.svg"
+chart_param_path = "homework-3\\config\\question_2\\q2_chart.toml"

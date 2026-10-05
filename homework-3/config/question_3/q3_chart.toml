@@ -1,0 +1,15 @@
+chart_color = [255, 255, 255, 1.0]
+chart_padding = 0.05
+font = "arial"
+
+margin = 20
+x_label_area_size = 60
+y_label_area_size = 100
+caption = "Walker Position Deviation"
+caption_size = 32
+
+max_light_lines = 5
+label_size = 24
+x_desc = "Step Size"
+y_desc = "Standard Deviation"
+desc_size = 28

@@ -1,0 +1,4 @@
+[workspace]
+members = ["comp-phys-common", "homework-3", "homework-4"]
+
+resolver = "3"

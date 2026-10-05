@@ -1,0 +1,9 @@
+[program_parameters]
+should_generate_figures = true
+mean_data_path = "homework-3\\output\\question_1\\q1_mean.json"
+mean_param_path = "homework-3\\config\\question_1\\question_1.toml"
+
+[figures_parameters]
+num_points = 100
+mixed_figure_path = "homework-3\\output\\question_4\\q4_figure_"
+chart_param_path = "homework-3\\config\\question_4\\q4_chart.toml"
