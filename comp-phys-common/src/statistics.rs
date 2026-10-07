@@ -1,4 +1,4 @@
-pub fn five_point_gauss_legendre_quadrature<T: Fn(f64) -> f64>(f: T) -> f64 {
+pub fn five_point_gauss_legendre_quadrature<T: Fn(f64) -> f64>(f: T, a: f64, b: f64) -> f64 {
     let c: Vec<(u64, u64)> = vec![
         (0x3FCE539EC36E038C, 0xBFECFF6CE0533A69),
         (0x3FDEA1DA25AE415B, 0xBFE13B23FD99B705),
@@ -7,7 +7,12 @@ pub fn five_point_gauss_legendre_quadrature<T: Fn(f64) -> f64>(f: T) -> f64 {
         (0x3FCE539EC36E038C, 0x3FECFF6CE0533A69),
     ];
 
-    c.into_iter()
-        .map(|n| f64::from_bits(n.0) * f(f64::from_bits(n.1)))
-        .sum()
+    let m: f64 = (b + a) / 2.0;
+    let d: f64 = (b - a) / 2.0;
+
+    let i: f64 = c
+        .into_iter()
+        .map(|n| f64::from_bits(n.0) * f(d * f64::from_bits(n.1) + m))
+        .sum();
+    d * i
 }

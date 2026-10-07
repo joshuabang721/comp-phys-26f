@@ -1,0 +1,5 @@
+coeff_value_path = "homework-4\\output\\question_0\\coefficient.json"
+
+lower_bound = 0.0
+upper_bound = 2.0
+num_steps = 64
