@@ -100,7 +100,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3d7b894f5411737b7867f4827955924d7c254fc9f4d91a6aad6b097804b1018b"
 
 [[package]]
-name = "comp-phys-common"
+name = "common"
 version = "0.1.0"
 dependencies = [
  "plotters",
@@ -346,6 +346,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "geometry"
+version = "0.1.0"
+dependencies = [
+ "serde",
+]
+
+[[package]]
 name = "getrandom"
 version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -377,7 +384,7 @@ checksum = "ed5909b6e89a2db4456e54cd5f673791d7eca6732202bbf2a9cc504fe2f9b84a"
 name = "homework-3"
 version = "0.1.0"
 dependencies = [
- "comp-phys-common",
+ "common",
  "plotters",
  "rand",
  "serde",
@@ -388,7 +395,7 @@ dependencies = [
 name = "homework-4"
 version = "0.1.0"
 dependencies = [
- "comp-phys-common",
+ "common",
  "plotters",
  "rand",
  "serde",

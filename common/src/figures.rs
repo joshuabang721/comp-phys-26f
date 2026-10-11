@@ -9,7 +9,7 @@ use plotters::{
 };
 use std::{error::Error, iter};
 
-pub fn generate_histogram_elements(data: Vec<f64>, style: ShapeStyle) -> PlotElement {
+pub fn generate_normalized_histogram_elements(data: Vec<f64>, style: ShapeStyle) -> PlotElement {
     let num_bins: usize = data.len().ilog2() as usize;
     let range_x = data.iter().fold((0.0, 0.0), |acc: (f64, f64), &x: &f64| {
         (acc.0.min(x), acc.1.max(x))

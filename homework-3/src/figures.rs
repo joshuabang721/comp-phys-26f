@@ -1,6 +1,8 @@
 use comp_phys_common::{
     config::figures_config::ChartParameters,
-    figures::{PlotElement, generate_histogram_elements, generate_line_element, generate_plot},
+    figures::{
+        PlotElement, generate_line_element, generate_normalized_histogram_elements, generate_plot,
+    },
 };
 use plotters::style::{Color, RGBAColor, colors::*};
 use std::error::Error;
@@ -14,7 +16,7 @@ pub fn q1_generate_figures(
     let plots: Vec<(usize, PlotElement)> = dists
         .iter()
         .map(|x| {
-            let e = generate_histogram_elements(x.1.clone(), BLUE.filled());
+            let e = generate_normalized_histogram_elements(x.1.clone(), BLUE.filled());
             let e_range = match e {
                 PlotElement::PlotRectangle { corners, .. } => corners,
                 PlotElement::PlotLine { range, .. } => range,
@@ -86,7 +88,8 @@ pub fn q4_generate_figures(
     let elements: Vec<(usize, PlotElement)> = histograms
         .iter()
         .map(|x| {
-            let e1: PlotElement = generate_histogram_elements(x.1.clone(), BLUE.filled());
+            let e1: PlotElement =
+                generate_normalized_histogram_elements(x.1.clone(), BLUE.filled());
             let e_range = match e1 {
                 PlotElement::PlotRectangle { corners, .. } => corners,
                 PlotElement::PlotLine { range, .. } => range,
