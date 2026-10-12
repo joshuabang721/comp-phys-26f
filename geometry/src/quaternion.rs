@@ -9,14 +9,14 @@ pub struct Quaternion {
 }
 
 impl ops::Neg for Quaternion {
-    type Output = Quaternion;
+    type Output = Self;
     /// Quaternion conjugate
     ///
     /// q = w + v
     ///
     /// -q := q' = w - v
     fn neg(self) -> Self::Output {
-        Quaternion {
+        Self::Output {
             w: self.w,
             v: -self.v,
         }
@@ -24,9 +24,9 @@ impl ops::Neg for Quaternion {
 }
 
 impl ops::Mul for Quaternion {
-    type Output = Quaternion;
+    type Output = Self;
     fn mul(self, rhs: Self) -> Self::Output {
-        Quaternion {
+        Self::Output {
             w: self.w * rhs.w - self.v * rhs.v,
             v: self.w * rhs.v + self.v * rhs.w - vector3::cross(self.v, rhs.v),
         }
@@ -50,6 +50,15 @@ impl ops::Mul<Quaternion> for Vector3 {
     /// v' = q' * v * q
     fn mul(self, rhs: Quaternion) -> Self::Output {
         (Quaternion { w: 0.0, v: self } * rhs).v
+    }
+}
+
+impl Default for Quaternion {
+    fn default() -> Self {
+        Self {
+            w: 1.0,
+            v: Default::default(),
+        }
     }
 }
 

@@ -1,5 +1,5 @@
-use comp_phys_common::{
-    config::figures_config::ChartParameters,
+use common::{
+    config::chart_config::ChartParameters,
     figures::{
         PlotElement, generate_line_element, generate_normalized_histogram_elements, generate_plot,
     },

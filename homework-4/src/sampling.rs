@@ -1,12 +1,12 @@
+use crate::config::hw4_config::Randomize;
 use rand::{RngExt, rngs::ThreadRng};
 
-/// Vec<(l,r)>
-/// 
-/// l ~ pi_step(l)
-/// 
-/// r ~ U(0,1)
-pub fn sample_markov_chain(n_steps: usize, step_size: f64, rng: &mut ThreadRng) -> Vec<(f64, f64)> {
+pub fn sample_markov_chain<E, P>(n_steps: usize, params: P, rng: &mut ThreadRng) -> Vec<(E, f64)>
+where
+    E: Randomize<Params = P>,
+    P: Copy,
+{
     (0..n_steps)
-        .map(|_| (rng.random_range(-step_size..step_size ), rng.random()))
+        .map(|_| (E::random_initialize(params, rng), rng.random()))
         .collect()
 }

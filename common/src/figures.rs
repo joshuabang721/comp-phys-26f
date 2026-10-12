@@ -1,4 +1,4 @@
-use crate::config::figures_config::ChartParameters;
+use crate::config::chart_config::ChartParameters;
 use plotters::{
     backend::{DrawingBackend, SVGBackend},
     chart::{ChartBuilder, ChartContext},

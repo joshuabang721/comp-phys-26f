@@ -1,12 +1,9 @@
 use crate::{
-    config::{
-        q1_config::Q1Parameters,
-        q4_config::Q4Parameters,
-    },
+    config::{q1_config::Q1Parameters, q4_config::Q4Parameters},
     figures::q4_generate_figures,
     statistics::q4_statistic_anal_soln,
 };
-use comp_phys_common::{config::figures_config::ChartParameters, data_io::read_data_from_json};
+use common::{config::chart_config::ChartParameters, data_io::read_data_from_json};
 use std::{error::Error, fs::read_to_string};
 
 pub fn question_4(params_path: String) -> Result<(), Box<dyn Error>> {

@@ -1,10 +1,9 @@
+use serde::{Serialize, de::DeserializeOwned};
 use std::{
     error::Error,
     fs::{File, read_to_string},
     io::Write,
 };
-
-use serde::{Serialize, de::DeserializeOwned};
 
 pub fn read_data_from_json<T: DeserializeOwned>(path: String) -> Result<T, Box<dyn Error>> {
     let text: String = read_to_string(path)?;

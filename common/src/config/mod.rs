@@ -1,1 +1,1 @@
-pub mod figures_config;
+pub mod chart_config;

@@ -1,4 +1,9 @@
+use std::ops::Add;
+
+use rand::RngExt;
 use serde::{Deserialize, Serialize};
+
+use crate::config::hw4_config::Randomize;
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Q1Parameters {
@@ -42,4 +47,25 @@ pub struct Q1DstParameters {
 pub struct Q1FigParameters {
     pub figure_path: String,
     pub chart_parameters_path: String,
+}
+
+#[derive(Clone, Copy, Debug, Default, Deserialize, Serialize)]
+pub struct Q1ParticlePosition {
+    pub x: f64,
+}
+
+impl Add for Q1ParticlePosition {
+    type Output = Self;
+    fn add(self, rhs: Self) -> Self::Output {
+        Self::Output { x: self.x + rhs.x }
+    }
+}
+
+impl Randomize for Q1ParticlePosition {
+    type Params = f64;
+    fn random_initialize(params: Self::Params, rng: &mut rand::rngs::ThreadRng) -> Self {
+        Self {
+            x: rng.random_range(-params..params),
+        }
+    }
 }

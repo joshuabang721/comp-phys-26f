@@ -3,8 +3,8 @@ use crate::{
     sampling::sample_random_steps, simulation::simulate_random_walks,
     statistics::q2_statistic_walk_sigma,
 };
-use comp_phys_common::{
-    config::figures_config::ChartParameters,
+use common::{
+    config::chart_config::ChartParameters,
     data_io::{read_data_from_json, write_data_to_json},
 };
 use rand::rngs::ThreadRng;
@@ -29,10 +29,8 @@ pub fn question_2(params_path: String, rng: &mut ThreadRng) -> Result<(), Box<dy
             dst.random_step_dist_type,
             rng,
         );
-        let random_walk_simulation: Vec<Vec<Vec<f64>>> = simulate_random_walks(
-            random_step_samples,
-            dst.initial_position,
-        );
+        let random_walk_simulation: Vec<Vec<Vec<f64>>> =
+            simulate_random_walks(random_step_samples, dst.initial_position);
         sigma = q2_statistic_walk_sigma(&random_walk_simulation[0]);
         write_data_to_json(pgm.sigma_data_path, &sigma)?;
     } else {

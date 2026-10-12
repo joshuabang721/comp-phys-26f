@@ -1,10 +1,16 @@
-pub fn simulate_markov_chain<T: Fn(f64) -> f64>(
-    x0: f64,
-    samples: Vec<(f64, f64)>,
-    pdf: T,
+use std::{fmt, ops::Add};
+
+pub fn simulate_markov_chain<E, F>(
+    pdf: F,
+    x0: E,
+    samples: Vec<(E, f64)>,
     init_eq_portion: usize,
-) -> Vec<f64> {
-    let mut x = 0.0;
+) -> Vec<E>
+where
+    E: Add<Output = E> + Copy + fmt::Debug + Default,
+    F: Fn(E) -> f64,
+{
+    let mut x: E = E::default();
     let mut px = 0.0;
     (0..=samples.len())
         .map(|i| {

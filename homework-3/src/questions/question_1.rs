@@ -1,10 +1,9 @@
 use crate::{
-    config::q1_config::Q1Parameters, figures::q1_generate_figures,
-    sampling::sample_random_steps, simulation::simulate_random_walks,
-    statistics::q1_statistic_walk_dists,
+    config::q1_config::Q1Parameters, figures::q1_generate_figures, sampling::sample_random_steps,
+    simulation::simulate_random_walks, statistics::q1_statistic_walk_dists,
 };
-use comp_phys_common::{
-    config::figures_config::ChartParameters,
+use common::{
+    config::chart_config::ChartParameters,
     data_io::{read_data_from_json, write_data_to_json},
 };
 use rand::rngs::ThreadRng;
@@ -30,14 +29,9 @@ pub fn question_1(params_path: String, rng: &mut ThreadRng) -> Result<(), Box<dy
             dst.random_step_dist_type,
             rng,
         );
-        let random_walk_simulation: Vec<Vec<Vec<f64>>> = simulate_random_walks(
-            random_step_samples,
-            dst.initial_position,
-        );
-        dists = q1_statistic_walk_dists(
-            &random_walk_simulation[0],
-            fig.number_of_times,
-        );
+        let random_walk_simulation: Vec<Vec<Vec<f64>>> =
+            simulate_random_walks(random_step_samples, dst.initial_position);
+        dists = q1_statistic_walk_dists(&random_walk_simulation[0], fig.number_of_times);
         write_data_to_json(pgm.mean_data_path, &dists)?;
     } else {
         dists = read_data_from_json(pgm.mean_data_path)?;

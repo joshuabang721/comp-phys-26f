@@ -23,10 +23,20 @@ impl Vector3 {
     }
 }
 
+impl Default for Vector3 {
+    fn default() -> Self {
+        Self {
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+        }
+    }
+}
+
 impl ops::Add for Vector3 {
     type Output = Self;
     fn add(self, rhs: Self) -> Self::Output {
-        Vector3 {
+        Self::Output {
             x: self.x + rhs.x,
             y: self.y + rhs.y,
             z: self.z + rhs.z,
@@ -37,7 +47,7 @@ impl ops::Add for Vector3 {
 impl ops::Sub for Vector3 {
     type Output = Self;
     fn sub(self, rhs: Self) -> Self::Output {
-        Vector3 {
+        Self::Output {
             x: self.x - rhs.x,
             y: self.y - rhs.y,
             z: self.z - rhs.z,
@@ -46,9 +56,9 @@ impl ops::Sub for Vector3 {
 }
 
 impl ops::Neg for Vector3 {
-    type Output = Vector3;
+    type Output = Self;
     fn neg(self) -> Self::Output {
-        Vector3 {
+        Self::Output {
             x: -self.x,
             y: -self.y,
             z: -self.z,
@@ -59,7 +69,7 @@ impl ops::Neg for Vector3 {
 impl ops::Mul<f64> for Vector3 {
     type Output = Vector3;
     fn mul(self, rhs: f64) -> Self::Output {
-        Vector3 {
+        Self::Output {
             x: rhs * self.x,
             y: rhs * self.y,
             z: rhs * self.z,
@@ -70,7 +80,7 @@ impl ops::Mul<f64> for Vector3 {
 impl ops::Mul<Vector3> for f64 {
     type Output = Vector3;
     fn mul(self, rhs: Vector3) -> Self::Output {
-        Vector3 {
+        Self::Output {
             x: self * rhs.x,
             y: self * rhs.y,
             z: self * rhs.z,
@@ -94,8 +104,4 @@ pub fn cross(lhs: Vector3, rhs: Vector3) -> Vector3 {
         y: lhs.z * rhs.x - lhs.x * rhs.z,
         z: lhs.x * rhs.y - lhs.y * rhs.x,
     }
-}
-
-pub fn new(x: f64, y: f64, z: f64) -> Vector3 {
-    Vector3 { x, y, z }
 }

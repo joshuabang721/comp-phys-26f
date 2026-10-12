@@ -6,7 +6,7 @@ num_steps = 64
 [program_parameters]
 should_calculate_coefficient = false
 should_calculate_statistics = false
-should_generate_figures = true
+should_generate_figures = false
 
 coefficient_value_path = "homework-4\\output\\question_1\\coefficient.json"
 markov_chain_data_path = "homework-4\\output\\question_1\\markov_chain.json"
