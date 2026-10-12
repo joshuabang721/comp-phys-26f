@@ -4,10 +4,6 @@
 /comp-phys-common/output
 /comp-phys-common/target
 
-/homework-3/output
-/homework-3/target
-
-/homework-4/output
-/homework-4/target
-
-
+/homework-*/output/**
+!/homework-*/output/**/
+/homework-*/target

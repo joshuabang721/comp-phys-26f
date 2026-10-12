@@ -1,9 +1,7 @@
-use std::ops::Add;
-
+use crate::config::hw4_config::Randomize;
 use rand::RngExt;
 use serde::{Deserialize, Serialize};
-
-use crate::config::hw4_config::Randomize;
+use std::ops::Add;
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Q1Parameters {
