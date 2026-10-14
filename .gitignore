@@ -1,9 +1,6 @@
 /target
-/output
 
-/comp-phys-common/output
-/comp-phys-common/target
+/output/**
+!/output/**/
 
-/homework-*/output/**
-!/homework-*/output/**/
-/homework-*/target
+/old

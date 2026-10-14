@@ -1,4 +1,13 @@
 [workspace]
-members = ["common", "geometry", "homework-3", "homework-4", "homework-6"]
+members = [
+    "config",
+    "dataio",
+    "figures",
+    "geometry",
+    "homework",
+    "sampling",
+    "simulation",
+    "statistics",
+]
 
 resolver = "3"

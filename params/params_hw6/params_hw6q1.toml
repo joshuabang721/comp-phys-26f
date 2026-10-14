@@ -1,0 +1,3 @@
+number_of_neurons = 400
+number_of_pattern = 40
+ising_spins_data_path = "output\\output_hw6\\output_hw6q1\\ising_spins.json"
