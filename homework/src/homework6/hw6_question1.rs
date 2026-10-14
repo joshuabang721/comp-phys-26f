@@ -8,10 +8,7 @@ pub fn hw6_question1(params_path: String, rng: &mut ThreadRng) -> () {
     let Hw6Q1Parameters {
         number_of_neurons: n,
         number_of_pattern: p,
-        memory_patterns_data_path,
-        interaction_matrix_data_path,
-        ising_spins_data_path,
-        overlap_path,
+        hw6q1_paths: paths,
     } = read_data_from_file(params_path, FileDataType::Toml);
 
     // x[m][i]
@@ -24,7 +21,7 @@ pub fn hw6_question1(params_path: String, rng: &mut ThreadRng) -> () {
         .collect();
     write_data_to_file(
         &memory_patterns,
-        memory_patterns_data_path,
+        paths.memory_patterns_data_path,
         FileDataType::Json,
     );
 
@@ -47,12 +44,12 @@ pub fn hw6_question1(params_path: String, rng: &mut ThreadRng) -> () {
         .collect();
     write_data_to_file(
         &interaction_matrix,
-        interaction_matrix_data_path,
+        paths.interaction_matrix_data_path,
         FileDataType::Json,
     );
 
     let initial_error_fraction = vec![0.05, 0.25, 0.40];
-    //  sigma[f][t][i]
+    //  s[f][t][i]
     let mut s_t = Vec::new();
     let ising_spins: Vec<Vec<Vec<i32>>> = initial_error_fraction
         .iter()
@@ -78,9 +75,13 @@ pub fn hw6_question1(params_path: String, rng: &mut ThreadRng) -> () {
                 .collect()
         })
         .collect();
-    write_data_to_file(&ising_spins, ising_spins_data_path, FileDataType::Json);
+    write_data_to_file(
+        &ising_spins,
+        paths.ising_spins_data_path,
+        FileDataType::Json,
+    );
 
-    //  m
+    //  m[f][mu][t]
     let overlap: Vec<Vec<Vec<f64>>> = initial_error_fraction
         .iter()
         .enumerate()
@@ -101,11 +102,11 @@ pub fn hw6_question1(params_path: String, rng: &mut ThreadRng) -> () {
                 .collect()
         })
         .collect();
-    write_data_to_file(&overlap, overlap_path, FileDataType::Json);
+    write_data_to_file(&overlap, paths.overlap_path, FileDataType::Json);
 }
 
 /// h[i]
-fn calculate_local_field(sigma: &Vec<i32>, interaction_matrix: &Vec<Vec<f64>>) -> Vec<f64> {
+pub fn calculate_local_field(sigma: &Vec<i32>, interaction_matrix: &Vec<Vec<f64>>) -> Vec<f64> {
     (0..interaction_matrix.len())
         .map(|i| {
             (0..sigma.len())

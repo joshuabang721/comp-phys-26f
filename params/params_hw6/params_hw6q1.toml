@@ -1,6 +1,8 @@
 number_of_neurons = 400
 number_of_pattern = 40
-memory_patterns_data_path = "output\\output_hw6\\output_hw6q1\\memory_patterns.json"
-interaction_matrix_data_path = "output\\output_hw6\\output_hw6q1\\interaction_matrix.json"
-ising_spins_data_path = "output\\output_hw6\\output_hw6q1\\ising_spins.json"
-overlap_path = "output\\output_hw6\\output_hw6q1\\overlap.json"
+
+[hw6q1_paths]
+memory_patterns_data_path = "output\\output_hw6\\memory_patterns.json"
+interaction_matrix_data_path = "output\\output_hw6\\interaction_matrix.json"
+ising_spins_data_path = "output\\output_hw6\\output_hw6q1\\q1_ising_spins.json"
+overlap_path = "output\\output_hw6\\output_hw6q1\\q1_soverlap.json"
