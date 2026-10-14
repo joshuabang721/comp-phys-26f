@@ -1,1 +1,3 @@
-pub fn homework_2() -> () {}
+use rand::rngs::ThreadRng;
+
+pub fn homework2(params_path: String, rng: &mut ThreadRng) -> () {}

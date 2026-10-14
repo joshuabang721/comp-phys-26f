@@ -2,7 +2,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct MainParameters {
-    pub should_run_homeworks: [bool; 7],
+    pub params_paths_hw: String,
+    pub should_run_hw: HwShouldRun,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct HwShouldRun {
+    pub should_run_hw1: bool,
+    pub should_run_hw2: bool,
+    pub should_run_hw3: bool,
+    pub should_run_hw4: bool,
+    pub should_run_hw5: bool,
+    pub should_run_hw6: bool,
+    pub should_run_hw7: bool,
 }
 
 #[derive(Debug, Deserialize, Serialize)]

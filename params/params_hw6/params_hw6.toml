@@ -1,1 +1,9 @@
-should_run_questions = [true, true, true, true, true, true]
+params_paths_hw6 = "params\\params_hw6\\params_hw6qi.toml"
+
+[should_run_hw6]
+should_run_hw6q1 = true
+should_run_hw6q2 = true
+should_run_hw6q3 = true
+should_run_hw6q4 = true
+should_run_hw6q5 = true
+should_run_hw6q6 = true

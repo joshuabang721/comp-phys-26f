@@ -1,1 +1,9 @@
-should_run_homeworks = [true, true, true, true, true, true, true]
+params_paths_hw = "params\\params_hwi\\params_hwi.toml"
+[should_run_hw]
+should_run_hw1 = true
+should_run_hw2 = true
+should_run_hw3 = true
+should_run_hw4 = true
+should_run_hw5 = true
+should_run_hw6 = true
+should_run_hw7 = true
