@@ -1,6 +1,8 @@
-/target
+/bash
+
+/old
 
 /output/**
 !/output/**/
 
-/old
+/target

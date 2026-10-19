@@ -1,0 +1,4 @@
+params_paths_hw1 = "params\\params_hw1\\params_hw1qi.toml"
+
+[should_run_hw1]
+should_run_hw1q1 = true

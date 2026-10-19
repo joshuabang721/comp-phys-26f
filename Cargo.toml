@@ -4,7 +4,7 @@ members = [
     "dataio",
     "figures",
     "geometry",
-    "homework",
+    "homework", "poop",
     "sampling",
     "simulation",
     "statistics",

@@ -1,10 +1,9 @@
-use std::collections::HashSet;
-
 use config::config_hw6::config_hw6q1::Hw6Q1Parameters;
 use dataio::dataio::{FileDataType, read_data_from_file, write_data_to_file};
 use rand::{RngExt, rngs::ThreadRng};
+use std::collections::HashSet;
 
-pub fn hw6_question1(params_path: String, rng: &mut ThreadRng) -> () {
+pub fn hw6_question1(params_path: &str, rng: &mut ThreadRng) -> () {
     let Hw6Q1Parameters {
         number_of_neurons: n,
         number_of_pattern: p,
@@ -21,7 +20,7 @@ pub fn hw6_question1(params_path: String, rng: &mut ThreadRng) -> () {
         .collect();
     write_data_to_file(
         &memory_patterns,
-        paths.memory_patterns_data_path,
+        &paths.memory_patterns_data_path,
         FileDataType::Json,
     );
 
@@ -44,7 +43,7 @@ pub fn hw6_question1(params_path: String, rng: &mut ThreadRng) -> () {
         .collect();
     write_data_to_file(
         &interaction_matrix,
-        paths.interaction_matrix_data_path,
+        &paths.interaction_matrix_data_path,
         FileDataType::Json,
     );
 
@@ -77,7 +76,7 @@ pub fn hw6_question1(params_path: String, rng: &mut ThreadRng) -> () {
         .collect();
     write_data_to_file(
         &ising_spins,
-        paths.ising_spins_data_path,
+        &paths.ising_spins_data_path,
         FileDataType::Json,
     );
 
@@ -102,7 +101,7 @@ pub fn hw6_question1(params_path: String, rng: &mut ThreadRng) -> () {
                 .collect()
         })
         .collect();
-    write_data_to_file(&overlap, paths.overlap_path, FileDataType::Json);
+    write_data_to_file(&overlap, &paths.overlap_path, FileDataType::Json);
 }
 
 /// h[i]

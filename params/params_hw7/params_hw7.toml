@@ -1,0 +1,4 @@
+params_paths_hw7 = "params\\params_hw7\\params_hw7qi.toml"
+
+[should_run_hw7]
+should_run_hw7q1 = true

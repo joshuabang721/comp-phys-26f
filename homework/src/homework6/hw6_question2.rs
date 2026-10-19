@@ -5,20 +5,20 @@ use rand::{RngExt, rngs::ThreadRng};
 
 use crate::homework6::hw6_question1::calculate_local_field;
 
-pub fn hw6_question2(_params_path: String, rng: &mut ThreadRng) -> () {
+pub fn hw6_question2(_params_path: &str, rng: &mut ThreadRng) -> () {
     let n = 400;
     // let p = 40;
     let t = 40;
 
     //  x[mu][i]
     let memory: Vec<Vec<i32>> = read_data_from_file(
-        "output\\output_hw6\\memory_patterns.json".to_string(),
+        "output\\output_hw6\\memory_patterns.json",
         FileDataType::Json,
     );
 
     //  J[i][j]
     let interaction: Vec<Vec<f64>> = read_data_from_file(
-        "output\\output_hw6\\interaction_matrix.json".to_string(),
+        "output\\output_hw6\\interaction_matrix.json",
         FileDataType::Json,
     );
 
@@ -69,7 +69,7 @@ pub fn hw6_question2(_params_path: String, rng: &mut ThreadRng) -> () {
 
     write_data_to_file(
         &spins,
-        "output\\output_hw6\\output_hw6q2\\q2_spins.json".to_string(),
+        "output\\output_hw6\\output_hw6q2\\q2_spins.json",
         FileDataType::Json,
     );
 
@@ -94,7 +94,7 @@ pub fn hw6_question2(_params_path: String, rng: &mut ThreadRng) -> () {
         .collect();
     write_data_to_file(
         &overlap,
-        "output\\output_hw6\\output_hw6q2\\q2_overlap.json".to_string(),
+        "output\\output_hw6\\output_hw6q2\\q2_overlap.json",
         FileDataType::Json,
     );
 }

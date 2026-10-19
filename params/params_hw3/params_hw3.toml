@@ -1,0 +1,4 @@
+params_paths_hw3 = "params\\params_hw3\\params_hw3qi.toml"
+
+[should_run_hw3]
+should_run_hw3q1 = true

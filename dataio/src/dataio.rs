@@ -1,7 +1,7 @@
-use serde::{Serialize, de::DeserializeOwned};
-use std::{fs::read_to_string, io::Write};
+use serde::{Deserialize, Serialize, de::DeserializeOwned};
+use std::{fs::read_to_string, io::Write, process::Command};
 
-pub fn read_data_from_file<T>(path: String, file_type: FileDataType) -> T
+pub fn read_data_from_file<T>(path: &str, file_type: FileDataType) -> T
 where
     T: DeserializeOwned,
 {
@@ -11,7 +11,7 @@ where
     }
 }
 
-pub fn write_data_to_file<T>(data: &T, path: String, file_type: FileDataType)
+pub fn write_data_to_file<T>(data: &T, path: &str, file_type: FileDataType)
 where
     T: Serialize,
 {
@@ -25,6 +25,29 @@ where
             .as_bytes(),
         )
         .unwrap();
+}
+
+pub fn publish_matlab_script(script: &str, function: &str, pdfdoc: &str, data_paths: &str) -> () {
+    let args = [
+        "-batch",
+        &format!(
+            r#"p = publish("{}",
+                format='pdf',
+                outputDir="output",
+                codeToEvaluate="{}({})");
+            movefile(p, fullfile(pwd, "output", '{}'));"#,
+            script, function, data_paths, pdfdoc
+        ),
+    ];
+
+    let _ = Command::new("matlab").args(args).status();
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct MatlabDocParameters {
+    pub script: String,
+    pub function: String,
+    pub pdfdoc: String,
 }
 
 pub enum FileDataType {

@@ -1,0 +1,4 @@
+params_paths_hw4 = "params\\params_hw4\\params_hw4qi.toml"
+
+[should_run_hw4]
+should_run_hw4q1 = true

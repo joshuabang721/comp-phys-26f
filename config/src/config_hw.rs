@@ -19,8 +19,15 @@ pub struct HwShouldRun {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct ProgramParameters {
-    pub should_calculate_statistics: bool,
-    pub should_generate_figures: bool,
+    pub should_generate_data: bool,
+    pub should_generate_docs: bool,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct FigureParameters {
+    pub title: String,
+    pub x_label: String,
+    pub y_label: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -37,11 +44,4 @@ pub struct ChartParameters {
     pub max_light_lines: usize,
     pub label_size: i32,
     pub desc_size: i32,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct FigureParameters {
-    pub caption: String,
-    pub x_desc: String,
-    pub y_desc: String,
 }
