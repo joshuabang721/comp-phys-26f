@@ -1,5 +1,9 @@
-use serde::{Deserialize, Serialize, de::DeserializeOwned};
-use std::{fs::read_to_string, io::Write, process::Command};
+use serde::{Serialize, de::DeserializeOwned};
+use std::{
+    fs::{read_to_string, remove_file},
+    io::Write,
+    process::Command,
+};
 
 pub fn read_data_from_file<T>(path: &str, file_type: FileDataType) -> T
 where
@@ -27,27 +31,25 @@ where
         .unwrap();
 }
 
-pub fn publish_matlab_script(script: &str, function: &str, pdfdoc: &str, data_paths: &str) -> () {
+pub fn publish_matlab_script(script: &str, function: &str, pdfdoc: &str, paths: Vec<&str>) -> () {
+    let paths_path = "dataio\\paths.json";
+    write_data_to_file(&paths, paths_path, FileDataType::Json);
+
     let args = [
         "-batch",
         &format!(
-            r#"p = publish("{}",
-                format='pdf',
-                outputDir="output",
-                codeToEvaluate="{}({})");
-            movefile(p, fullfile(pwd, "output", '{}'));"#,
-            script, function, data_paths, pdfdoc
+            "addpath(\\\"scripts\\\");addpath(\\\"output\\\");p = publish(\\\"{}\\\", format='pdf', outputDir='output', codeToEvaluate='{}(\\\"{}\\\")');movefile(p, fullfile(pwd, \\\"{}\\\"));",
+            script, function, paths_path, pdfdoc
         ),
     ];
+    // println!("{:?}\n", args);
+
+    // println!(
+    //     "correct version:\np = publish(\"matlab\\matlab_hw1.m\", format='pdf', outputDir='output', codeToEvaluate='matlab_hw1(\"dataio\\paths.json\")');movefile(p, fullfile(pwd, \"output\\output_hw1\\hw1_document.pdf\"));\n"
+    // );
 
     let _ = Command::new("matlab").args(args).status();
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct MatlabDocParameters {
-    pub script: String,
-    pub function: String,
-    pub pdfdoc: String,
+    remove_file(paths_path).unwrap();
 }
 
 pub enum FileDataType {

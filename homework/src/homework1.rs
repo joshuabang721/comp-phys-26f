@@ -1,4 +1,4 @@
-use dataio::dataio::{FileDataType, write_data_to_file};
+use dataio::dataio::{FileDataType, publish_matlab_script, write_data_to_file};
 use rand::{RngExt, rngs::ThreadRng};
 
 pub fn homework1(rng: &mut ThreadRng) -> () {
@@ -6,7 +6,19 @@ pub fn homework1(rng: &mut ThreadRng) -> () {
     hw1_question2();
     hw1_question3(rng);
     hw1_question4(rng);
-    // publish_matlab_script(mtlb, &data_paths_hw1.join(","));
+    publish_matlab_script(
+        "scripts\\matlab_hw1.m",
+        "matlab_hw1",
+        "output\\output_hw1\\hw1_document.pdf",
+        vec![
+            "output\\output_hw1\\hw1_prng_samples.json",
+            "output\\output_hw1\\hw1_lcg_samples.json",
+            "output\\output_hw1\\hw1_prng_vector_samples.json",
+            "output\\output_hw1\\hw1_lcg_vector_samples.json",
+            "output\\output_hw1\\hw1_prng_autocorrelation.json",
+            "output\\output_hw1\\hw1_lcg_autocorrelation.json",
+        ],
+    );
 }
 
 fn hw1_question1(rng: &mut ThreadRng) -> () {
@@ -85,6 +97,7 @@ fn hw1_question3(rng: &mut ThreadRng) -> () {
 
 fn hw1_question4(rng: &mut ThreadRng) -> () {
     let len = 10000;
+    let n_max = 5000;
 
     let prng_samples = rng.random_iter::<f64>().take(len).collect::<Vec<f64>>();
 
@@ -106,10 +119,10 @@ fn hw1_question4(rng: &mut ThreadRng) -> () {
     let prng_autocorrelation_function = autocorrelation_function(&prng_samples);
     let lcg_autocorrelation_function = autocorrelation_function(&lcg_samples);
 
-    let prng_autocorrelation = (0..len)
+    let prng_autocorrelation = (1..n_max)
         .map(|n| prng_autocorrelation_function(n))
         .collect::<Vec<f64>>();
-    let lcg_autocorrelation = (0..len)
+    let lcg_autocorrelation = (1..n_max)
         .map(|n| lcg_autocorrelation_function(n))
         .collect::<Vec<f64>>();
 

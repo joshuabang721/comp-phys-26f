@@ -52,10 +52,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "877a4ace8713b0bcf2a4e7eec82529c029f1d0619886d18145fea96c3ffe5c0f"
 
 [[package]]
-name = "figures"
-version = "0.1.0"
-
-[[package]]
 name = "geometry"
 version = "0.1.0"
 dependencies = [
@@ -159,10 +155,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "63b8176103e19a2643978565ca18b50549f6101881c443590420e4dc998a3c69"
 
 [[package]]
-name = "sampling"
-version = "0.1.0"
-
-[[package]]
 name = "serde"
 version = "1.0.229"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -213,14 +205,6 @@ checksum = "4e7523beb55eece201a2356bee0bbca0d1ab466c14c07703b2e0ee6d42cb0c2c"
 dependencies = [
  "serde_core",
 ]
-
-[[package]]
-name = "simulation"
-version = "0.1.0"
-
-[[package]]
-name = "statistics"
-version = "0.1.0"
 
 [[package]]
 name = "syn"
