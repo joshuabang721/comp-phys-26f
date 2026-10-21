@@ -46,7 +46,7 @@ disp("The stationary distributions are concentrated at the two fully aligned con
 transition_matrices = jsondecode(fileread(paths(3)));
 temperature = 1:0.1:10;
 
-lambda2 = arrayfun()
+% lambda2 = arrayfun(@())
 
 %%  Question 2: Monte Carlo simulation of the 1D Ising model.
 %%  Question 3: Transfer-matrix method for the 1D Ising model.
