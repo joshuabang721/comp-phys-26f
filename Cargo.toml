@@ -1,4 +1,4 @@
 [workspace]
-members = ["config", "dataio", "geometry", "homework"]
+members = ["dataio", "geometry", "homework"]
 
 resolver = "3"

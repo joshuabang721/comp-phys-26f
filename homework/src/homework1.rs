@@ -1,38 +1,55 @@
 use dataio::dataio::{FileDataType, publish_matlab_script, write_data_to_file};
 use rand::{RngExt, rngs::ThreadRng};
+use std::time::Instant;
 
 pub fn homework1(rng: &mut ThreadRng) -> () {
+    let hw1_start = Instant::now();
+    println!("Homework 1 start!");
+
     hw1_question1(rng);
     hw1_question2();
     hw1_question3(rng);
     hw1_question4(rng);
+
     publish_matlab_script(
         "scripts\\matlab_hw1.m",
         "matlab_hw1",
         "output\\output_hw1\\hw1_document.pdf",
         vec![
-            "output\\output_hw1\\hw1_prng_samples.json",
-            "output\\output_hw1\\hw1_lcg_samples.json",
-            "output\\output_hw1\\hw1_prng_vector_samples.json",
-            "output\\output_hw1\\hw1_lcg_vector_samples.json",
-            "output\\output_hw1\\hw1_prng_autocorrelation.json",
-            "output\\output_hw1\\hw1_lcg_autocorrelation.json",
+            "output\\output_hw1\\prng_samples.json",
+            "output\\output_hw1\\lcg_samples.json",
+            "output\\output_hw1\\prng_vector_samples.json",
+            "output\\output_hw1\\lcg_vector_samples.json",
+            "output\\output_hw1\\prng_autocorrelation.json",
+            "output\\output_hw1\\lcg_autocorrelation.json",
         ],
     );
+
+    let hw1_duration = hw1_start.elapsed();
+    println!("Homework 1 finish! Time elapsed: {:?}", hw1_duration);
 }
 
 fn hw1_question1(rng: &mut ThreadRng) -> () {
+    let hw1q1_start = Instant::now();
+    println!("Hw 1 question 1 start!");
+
     let n = 10000;
     let prng_samples = rng.random_iter::<f64>().take(n).collect::<Vec<f64>>();
 
     write_data_to_file(
         &prng_samples,
-        "output\\output_hw1\\hw1_prng_samples.json",
+        "output\\output_hw1\\prng_samples.json",
         FileDataType::Json,
     );
+
+    let hw1q1_duration = hw1q1_start.elapsed();
+    println!("Hw 1 question 1 finish! Time elapsed: {:?}", hw1q1_duration);
 }
 
 fn hw1_question2() -> () {
+    let hw1q2_start = Instant::now();
+    println!("Hw 1 question 2 start!");
+
     let n = 10000;
     let a = 63;
     let c = 319;
@@ -51,12 +68,18 @@ fn hw1_question2() -> () {
 
     write_data_to_file(
         &lcg_samples,
-        "output\\output_hw1\\hw1_lcg_samples.json",
+        "output\\output_hw1\\lcg_samples.json",
         FileDataType::Json,
     );
+
+    let hw1q2_duration = hw1q2_start.elapsed();
+    println!("Hw 1 question 2 finish! Time elapsed: {:?}", hw1q2_duration);
 }
 
 fn hw1_question3(rng: &mut ThreadRng) -> () {
+    let hw1q3_start = Instant::now();
+    println!("Hw 1 question 3 start!");
+
     let n = 100000;
 
     let prng_vector_samples = (0..3)
@@ -85,17 +108,23 @@ fn hw1_question3(rng: &mut ThreadRng) -> () {
 
     write_data_to_file(
         &prng_vector_samples,
-        "output\\output_hw1\\hw1_prng_vector_samples.json",
+        "output\\output_hw1\\prng_vector_samples.json",
         FileDataType::Json,
     );
     write_data_to_file(
         &lcg_vector_samples,
-        "output\\output_hw1\\hw1_lcg_vector_samples.json",
+        "output\\output_hw1\\lcg_vector_samples.json",
         FileDataType::Json,
     );
+
+    let hw1q3_duration = hw1q3_start.elapsed();
+    println!("Hw 1 question 3 finish! Time elapsed: {:?}", hw1q3_duration);
 }
 
 fn hw1_question4(rng: &mut ThreadRng) -> () {
+    let hw1q4_start = Instant::now();
+    println!("Hw 1 question 4 start!");
+
     let len = 10000;
     let n_max = 5000;
 
@@ -128,14 +157,17 @@ fn hw1_question4(rng: &mut ThreadRng) -> () {
 
     write_data_to_file(
         &prng_autocorrelation,
-        "output\\output_hw1\\hw1_prng_autocorrelation.json",
+        "output\\output_hw1\\prng_autocorrelation.json",
         FileDataType::Json,
     );
     write_data_to_file(
         &lcg_autocorrelation,
-        "output\\output_hw1\\hw1_lcg_autocorrelation.json",
+        "output\\output_hw1\\lcg_autocorrelation.json",
         FileDataType::Json,
     );
+
+    let hw1q4_duration = hw1q4_start.elapsed();
+    println!("Hw 1 question 4 finish! Time elapsed: {:?}", hw1q4_duration);
 }
 
 fn linear_congruential_generator(a: u64, c: u64, m: u64) -> impl Fn(u64) -> u64 {

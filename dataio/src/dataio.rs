@@ -42,13 +42,8 @@ pub fn publish_matlab_script(script: &str, function: &str, pdfdoc: &str, paths: 
             script, function, paths_path, pdfdoc
         ),
     ];
-    // println!("{:?}\n", args);
-
-    // println!(
-    //     "correct version:\np = publish(\"matlab\\matlab_hw1.m\", format='pdf', outputDir='output', codeToEvaluate='matlab_hw1(\"dataio\\paths.json\")');movefile(p, fullfile(pwd, \"output\\output_hw1\\hw1_document.pdf\"));\n"
-    // );
-
     let _ = Command::new("matlab").args(args).status();
+
     remove_file(paths_path).unwrap();
 }
 

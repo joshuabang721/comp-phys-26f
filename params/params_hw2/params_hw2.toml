@@ -1,4 +1,0 @@
-params_paths_hw2 = "params\\params_hw2\\params_hw2qi.toml"
-
-[should_run_hw2]
-should_run_hw2q1 = true
