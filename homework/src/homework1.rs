@@ -2,6 +2,15 @@ use dataio::dataio::{FileDataType, publish_matlab_script, write_data_to_file};
 use rand::{RngExt, rngs::ThreadRng};
 use std::time::Instant;
 
+const PATHS: [&str; 6] = [
+    "output\\output_hw1\\prng_samples.json",
+    "output\\output_hw1\\lcg_samples.json",
+    "output\\output_hw1\\prng_vector_samples.json",
+    "output\\output_hw1\\lcg_vector_samples.json",
+    "output\\output_hw1\\prng_autocorrelation.json",
+    "output\\output_hw1\\lcg_autocorrelation.json",
+];
+
 pub fn homework1(rng: &mut ThreadRng) -> () {
     let hw1_start = Instant::now();
     println!("Homework 1 start!");
@@ -15,14 +24,7 @@ pub fn homework1(rng: &mut ThreadRng) -> () {
         "scripts\\matlab_hw1.m",
         "matlab_hw1",
         "output\\output_hw1\\hw1_document.pdf",
-        vec![
-            "output\\output_hw1\\prng_samples.json",
-            "output\\output_hw1\\lcg_samples.json",
-            "output\\output_hw1\\prng_vector_samples.json",
-            "output\\output_hw1\\lcg_vector_samples.json",
-            "output\\output_hw1\\prng_autocorrelation.json",
-            "output\\output_hw1\\lcg_autocorrelation.json",
-        ],
+        PATHS.to_vec(),
     );
 
     let hw1_duration = hw1_start.elapsed();
@@ -36,11 +38,7 @@ fn hw1_question1(rng: &mut ThreadRng) -> () {
     let n = 10000;
     let prng_samples = rng.random_iter::<f64>().take(n).collect::<Vec<f64>>();
 
-    write_data_to_file(
-        &prng_samples,
-        "output\\output_hw1\\prng_samples.json",
-        FileDataType::Json,
-    );
+    write_data_to_file(&prng_samples, PATHS[0], FileDataType::Json);
 
     let hw1q1_duration = hw1q1_start.elapsed();
     println!("Hw 1 question 1 finish! Time elapsed: {:?}", hw1q1_duration);
@@ -66,11 +64,7 @@ fn hw1_question2() -> () {
         })
         .collect();
 
-    write_data_to_file(
-        &lcg_samples,
-        "output\\output_hw1\\lcg_samples.json",
-        FileDataType::Json,
-    );
+    write_data_to_file(&lcg_samples, PATHS[1], FileDataType::Json);
 
     let hw1q2_duration = hw1q2_start.elapsed();
     println!("Hw 1 question 2 finish! Time elapsed: {:?}", hw1q2_duration);
@@ -106,16 +100,8 @@ fn hw1_question3(rng: &mut ThreadRng) -> () {
         })
         .collect::<Vec<Vec<f64>>>();
 
-    write_data_to_file(
-        &prng_vector_samples,
-        "output\\output_hw1\\prng_vector_samples.json",
-        FileDataType::Json,
-    );
-    write_data_to_file(
-        &lcg_vector_samples,
-        "output\\output_hw1\\lcg_vector_samples.json",
-        FileDataType::Json,
-    );
+    write_data_to_file(&prng_vector_samples, PATHS[2], FileDataType::Json);
+    write_data_to_file(&lcg_vector_samples, PATHS[3], FileDataType::Json);
 
     let hw1q3_duration = hw1q3_start.elapsed();
     println!("Hw 1 question 3 finish! Time elapsed: {:?}", hw1q3_duration);
@@ -155,16 +141,8 @@ fn hw1_question4(rng: &mut ThreadRng) -> () {
         .map(|n| lcg_autocorrelation_function(n))
         .collect::<Vec<f64>>();
 
-    write_data_to_file(
-        &prng_autocorrelation,
-        "output\\output_hw1\\prng_autocorrelation.json",
-        FileDataType::Json,
-    );
-    write_data_to_file(
-        &lcg_autocorrelation,
-        "output\\output_hw1\\lcg_autocorrelation.json",
-        FileDataType::Json,
-    );
+    write_data_to_file(&prng_autocorrelation, PATHS[4], FileDataType::Json);
+    write_data_to_file(&lcg_autocorrelation, PATHS[5], FileDataType::Json);
 
     let hw1q4_duration = hw1q4_start.elapsed();
     println!("Hw 1 question 4 finish! Time elapsed: {:?}", hw1q4_duration);
