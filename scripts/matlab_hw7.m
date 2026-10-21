@@ -80,7 +80,7 @@ ep = jsondecode(fileread(paths(10)));
 et = jsondecode(fileread(paths(11)));
 e_exact = et(1);
 
-figure(2);
+figure(5);
 hold on;
 plot(t,ek,'b-');
 plot(t,ep,'g-');
@@ -97,7 +97,7 @@ hold off;
 dt = 0.025:0.025:0.2;
 error = jsondecode(fileread(paths(12)));
 
-figure(3);
+figure(6);
 hold on;
 plot(log(dt),log(error),'b-');
 title("Velocity Verlet Error");

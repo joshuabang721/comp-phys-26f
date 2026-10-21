@@ -124,8 +124,11 @@ fn hw7_question2() -> () {
     write_data_to_file(&x2, PATHS[6], FileDataType::Json);
     write_data_to_file(&x3, PATHS[7], FileDataType::Json);
 
-    let e_k = |v: Vector3| 0.5 * m * (v[0] + v[1] + v[2]);
-    let e_p = |x: Vector3| 0.5 * k * (x[0] + x[1] + x[2]);
+    let e_k = |v: Vector3| 0.5 * m * (v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+    let e_p = |x: Vector3| {
+        let dx = [x[1] - x[0], x[2] - x[1], x[0] - x[2]];
+        0.5 * k * (dx[0] * dx[0] + dx[1] * dx[1] + dx[2] * dx[2])
+    };
     let e_t = |x: Vector3, v: Vector3| e_k(v) + e_p(x);
 
     let ek_n = (0..=n_max).map(|n| e_k(v[n])).collect::<Vec<f64>>();
