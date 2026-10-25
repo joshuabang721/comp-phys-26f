@@ -15,17 +15,32 @@ pub fn homework1(rng: &mut ThreadRng) -> () {
     let hw1_start = Instant::now();
     println!("Homework 1 start!");
 
-    hw1_question1(rng);
-    hw1_question2();
-    hw1_question3(rng);
-    hw1_question4(rng);
+    let run_hw1question1 = true;
+    let run_hw1question2 = true;
+    let run_hw1question3 = true;
+    let run_hw1question4 = true;
+    let run_hw1matlab = true;
 
-    publish_matlab_script(
-        "scripts\\matlab_hw1.m",
-        "matlab_hw1",
-        "output\\output_hw1\\hw1_document.pdf",
-        PATHS.to_vec(),
-    );
+    if run_hw1question1 {
+        hw1_question1(rng);
+    }
+    if run_hw1question2 {
+        hw1_question2();
+    }
+    if run_hw1question3 {
+        hw1_question3(rng);
+    }
+    if run_hw1question4 {
+        hw1_question4(rng);
+    }
+    if run_hw1matlab {
+        publish_matlab_script(
+            "scripts\\matlab_hw1.m",
+            "matlab_hw1",
+            "output\\output_hw1\\hw1_document.pdf",
+            PATHS.to_vec(),
+        );
+    }
 
     let hw1_duration = hw1_start.elapsed();
     println!("Homework 1 finish! Time elapsed: {:?}", hw1_duration);

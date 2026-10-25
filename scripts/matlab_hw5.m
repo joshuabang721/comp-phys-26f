@@ -1,6 +1,11 @@
 %%  Homework 5
+
+%   GitHub: https://github.com/joshuabang721/comp-phys-26f
+
 function matlab_hw5(pathstr)
+
 paths = string(jsondecode(fileread(pathstr)));
+
 %%  Question 1: Three-spin Ising model and the transition matrix.
 
 %   Transition graph
@@ -43,17 +48,95 @@ disp("The stationary distributions are concentrated at the two fully aligned con
 
 %   Relaxation time
 
-transition_matrices = jsondecode(fileread(paths(3)));
-temperature = 1:0.1:10;
+temperature = jsondecode(fileread(paths(3)));
+transition_matrices = jsondecode(fileread(paths(4)));
 
-% lambda2 = arrayfun(@())
+lambda2 = arrayfun(@(i) second_eigenvalue(squeeze(transition_matrices(i,:,:))), 1:(length(transition_matrices)));
+trelax = -1 ./ log(lambda2');
+
+figure(5);
+hold on;
+plot(temperature,trelax,'b-');
+title("Relaxation Time");
+xlabel("Temperature");
+ylabel("Time");
+hold off;
 
 %%  Question 2: Monte Carlo simulation of the 1D Ising model.
+
+kb = 1;
+J = 1;
+N = 50;
+
+t = jsondecode(fileread(paths(5)));
+energy_density = jsondecode(fileread(paths(6)));
+heat_capacity = jsondecode(fileread(paths(7)));
+magnet_density = jsondecode(fileread(paths(8)));
+magnet_sus = jsondecode(fileread(paths(9)));
+
+b = @(t) 1 ./ (kb*t);
+lp = @(t) exp(b(t)*J) + exp(-b(t)*J);
+lm = @(t) exp(b(t)*J) - exp(-b(t)*J);
+Z = @(t) (lp(t)).^(N) + (lm(t)).^(N);
+
+energy_density_true = @(t) -J .* ((lp(t).^(N-1)).*lm(t) + (lm(t).^(N-1)).*lp(t)) ./ Z(t);
+heat_capacity_true = @(t) (4.*kb.*(b(t).*J).^2).*(lp(t).^(2*N-2) - lm(t).^(2*N-2) + 4.*(N-1).*((lp(t).*lm(t)).^(N-2))) ./ ((Z(t)).^2);
+magnet_sus_true = @(t) b(t).*((lp(t).^(N-1)).*(exp(b(t).*J) + exp(3.*b(t).*J)) + (lm(t).^(N-1)).*(exp(b(t).*J) - exp(3.*b(t).*J))) ./ Z(t);
+
+e = energy_density_true(t);
+c = heat_capacity_true(t);
+x = magnet_sus_true(t);
+
+e_mask = abs(e) <= max(abs(energy_density));
+c_mask = abs(c) <= max(abs(heat_capacity));
+x_mask = abs(x) <= max(abs(magnet_sus));
+
+figure(6);
+hold on;
+plot(t(e_mask),e(e_mask),'r-',LineWidth=1);
+plot(t,energy_density,'bo',MarkerSize=4);
+title("Energy Density");
+xlabel("Temperature");
+ylabel("Density");
+legend("Analytical", "Simulated");
+hold off;
+
+figure(7);
+hold on;
+plot(t(c_mask),c(c_mask),'r-',LineWidth=1);
+plot(t,heat_capacity,'bo',MarkerSize=4);
+ylim([-0.1,inf]);
+title("Heat Capacity per Site");
+xlabel("Temperature");
+ylabel("Capacity");
+legend("Analytical", "Simulated");
+hold off;
+
+figure(8);
+hold on;
+yline(0,'r-',LineWidth=1)
+plot(t,magnet_density,'bo',MarkerSize=4);
+title("Magnetization Density");
+xlabel("Temperature");
+ylabel("Density");
+legend("Analytical", "Simulated");
+hold off;
+
+figure(9);
+hold on;
+plot(t(x_mask),x(x_mask),'r-',LineWidth=1);
+plot(t,magnet_sus,'bo',MarkerSize=4);
+title("Magnetization Susceptability per Site");
+xlabel("Temperature");
+ylabel("Susceptability");
+legend("Analytical", "Simulated");
+hold off;
+
 %%  Question 3: Transfer-matrix method for the 1D Ising model.
 end
 
-function l = second_eigenvalue(P)
-[~,D] = eig(matrix);
+function l2 = second_eigenvalue(P)
+[~,D] = eig(P);
 [ds,~] = sort(abs(diag(D)),"descend");
-l = ds(2);
+l2 = ds(2);
 end

@@ -1,6 +1,11 @@
 %%  Homework 1
+
+%   GitHub: https://github.com/joshuabang721/comp-phys-26f
+
 function matlab_hw1(pathstr)
+
 paths = string(jsondecode(fileread(pathstr)));
+
 %%  1)  Choose a reference pseudo-random number generator.
 
 disp("The default algorithm used by Rust's standard rand crate is the ChaCha block cipher with 12 rounds. The RNG can be reseeded using the reseed() method.");

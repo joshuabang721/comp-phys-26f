@@ -3,6 +3,7 @@ use std::{
     fs::{read_to_string, remove_file},
     io::Write,
     process::Command,
+    time::Instant,
 };
 
 pub fn read_data_from_file<T>(path: &str, file_type: FileDataType) -> T
@@ -32,6 +33,9 @@ where
 }
 
 pub fn publish_matlab_script(script: &str, function: &str, pdfdoc: &str, paths: Vec<&str>) -> () {
+    let matlab_start = Instant::now();
+    println!("Matlab start!");
+
     let paths_path = "dataio\\paths.json";
     write_data_to_file(&paths, paths_path, FileDataType::Json);
 
@@ -45,6 +49,9 @@ pub fn publish_matlab_script(script: &str, function: &str, pdfdoc: &str, paths: 
     let _ = Command::new("matlab").args(args).status();
 
     remove_file(paths_path).unwrap();
+
+    let matlab_duration = matlab_start.elapsed();
+    println!("Matlab finish! Time elapsed: {:?}", matlab_duration);
 }
 
 pub enum FileDataType {
