@@ -11,15 +11,24 @@ pub fn homework8(_rng: &mut ThreadRng) -> () {
     let hw8_start = Instant::now();
     println!("Homework 8 start!");
 
-    hw8_question1();
-    hw8_question2();
+    let run_hw8question1 = false;
+    let run_hw8question2 = false;
+    let run_hw8matlab = true;
 
-    publish_matlab_script(
-        "scripts\\matlab_hw8.m",
-        "matlab_hw8",
-        "output\\output_hw8\\hw8_document.pdf",
-        PATHS.to_vec(),
-    );
+    if run_hw8question1 {
+        hw8_question1();
+    }
+    if run_hw8question2 {
+        // hw8_question2(rng);
+    }
+    if run_hw8matlab {
+        publish_matlab_script(
+            "scripts\\matlab_hw8.m",
+            "matlab_hw8",
+            "output\\output_hw8\\hw8_document.pdf",
+            PATHS.to_vec(),
+        );
+    }
 
     let hw8_duration = hw8_start.elapsed();
     println!("Homework 8 finish! Time elapsed: {:?}", hw8_duration);

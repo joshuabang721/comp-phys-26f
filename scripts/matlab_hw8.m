@@ -15,8 +15,8 @@ waves = jsondecode(fileread(paths(2)));
 
 for i = 1:3
     time = squeeze(times(i,:));
-    n = time(time = t);
-    wave = squeeze(wave(i,:,:));
+    n = ismember(time, t);
+    wave = squeeze(waves(i,:,:));
     x_n = wave(n,:);
 
     figure(i)
@@ -24,7 +24,7 @@ for i = 1:3
     for j = 1:length(x_n)
         plot(x_n(j,:),'b-');
     end
-    title("Lax Wave Propogation");
+    title("Lax Wave Propagation (dt = " + string(dt(i)));
     xlabel("Position");
     ylabel("Wave");
     legend("t = 0","t = 5","t = 10","t = 15","t = 20");
