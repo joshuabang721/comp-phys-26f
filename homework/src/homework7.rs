@@ -18,7 +18,7 @@ const PATHS: [&str; 12] = [
     "output\\output_hw7\\chain_error.json",
 ];
 
-pub fn homework7(rng: &mut ThreadRng) -> () {
+pub fn homework7(_rng: &mut ThreadRng) -> () {
     let hw7_start = Instant::now();
     println!("Homework 7 start!");
 

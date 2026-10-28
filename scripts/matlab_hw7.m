@@ -36,7 +36,7 @@ yline(e_exact,'k-');
 title("Simple Harmonic Oscillator Energy");
 xlabel("Time");
 ylabel("Energy");
-legend("Kinetic Energy","Potential Energy","Total Energy","Exact Energy (E_T(0))");
+legend("Kinetic Energy","Potential Energy","Total Energy","Exact Energy (E_T(0))", Location="southeast");
 hold off;
 
 %   Error scaling.
@@ -89,7 +89,7 @@ yline(e_exact,'k-');
 title("Simple Harmonic Oscillator Energy");
 xlabel("Time");
 ylabel("Energy");
-legend("Kinetic Energy","Potential Energy","Total Energy","Exact Energy (E_T(0))");
+legend("Kinetic Energy","Potential Energy","Total Energy","Exact Energy (E_T(0))", Location="southeast");
 hold off;
 
 %   Error scaling.

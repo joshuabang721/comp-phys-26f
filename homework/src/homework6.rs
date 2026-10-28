@@ -1,5 +1,5 @@
 use rand::rngs::ThreadRng;
 
-pub fn homework6(rng: &mut ThreadRng) -> () {}
+pub fn homework6(_rng: &mut ThreadRng) -> () {}
 
-fn hw6_question1() -> () {}
+fn _hw6_question1(_rng: &mut ThreadRng) -> () {}
