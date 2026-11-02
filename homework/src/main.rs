@@ -1,6 +1,7 @@
 use homework::{
     homework1::homework1, homework2::homework2, homework3::homework3, homework4::homework4,
     homework5::homework5, homework6::homework6, homework7::homework7, homework8::homework8,
+    homework9::homework9,
 };
 use rand::rngs::ThreadRng;
 use std::time::Instant;
@@ -17,7 +18,8 @@ fn main() -> () {
     let run_homework5 = false;
     let run_homework6 = false;
     let run_homework7 = false;
-    let run_homework8 = true;
+    let run_homework8 = false;
+    let run_homework9 = true;
 
     if run_homework1 {
         homework1(&mut rng);
@@ -42,6 +44,9 @@ fn main() -> () {
     }
     if run_homework8 {
         homework8(&mut rng);
+    }
+    if run_homework9 {
+        homework9(&mut rng);
     }
 
     let hw_duration = hw_start.elapsed();

@@ -11,15 +11,15 @@ pub fn homework8(_rng: &mut ThreadRng) -> () {
     let hw8_start = Instant::now();
     println!("Homework 8 start!");
 
-    let run_hw8question1 = false;
-    let run_hw8question2 = false;
+    let run_hw8question1 = true;
+    let run_hw8question2 = true;
     let run_hw8matlab = true;
 
     if run_hw8question1 {
         hw8_question1();
     }
     if run_hw8question2 {
-        // hw8_question2(rng);
+        hw8_question2();
     }
     if run_hw8matlab {
         publish_matlab_script(
@@ -44,7 +44,7 @@ fn hw8_question1() -> () {
     let u_x_0 = |x: f64| (-x * x / (w * w)).exp();
     let x_min: f64 = -20.0;
     let x_max: f64 = 50.0;
-    let x_num = ((x_max - x_min).abs() / dx) as usize;
+    let x_num = ((x_max - x_min).abs() / dx + 1.0) as usize;
     let t_max = 20.0;
 
     let dt = [0.06, 0.10, 0.14];
@@ -52,14 +52,15 @@ fn hw8_question1() -> () {
         .map(|d| {
             let n_max = (t_max / d) as usize;
             (
-                (0..n_max).map(|n| d * (n as f64)).collect::<Vec<f64>>(),
-                (0..n_max)
+                (0..=n_max).map(|n| d * (n as f64)).collect::<Vec<f64>>(),
+                (0..=n_max)
                     .scan(Vec::new(), |state, n| {
-                        if n == 0 {
-                            Some((0..x_num).map(|x| u_x_0(x as f64)).collect::<Vec<f64>>())
+                        *state = if n == 0 {
+                            (0..x_num).map(|x| u_x_0(x as f64)).collect::<Vec<f64>>()
                         } else {
-                            Some(lax_update(state, v, d, dx))
-                        }
+                            lax_update(state, v, d, dx)
+                        };
+                        Some(state.clone())
                     })
                     .collect::<Vec<Vec<f64>>>(),
             )
