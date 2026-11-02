@@ -13,7 +13,7 @@ pub fn homework9(_rng: &mut ThreadRng) -> () {
 
     let run_hw9question1 = true;
     let run_hw9question2 = true;
-    let run_hw9matlab = false;
+    let run_hw9matlab = true;
 
     if run_hw9question1 {
         hw9_question1();
@@ -69,7 +69,7 @@ fn hw9_question1() -> () {
     };
 
     let x_0_i = (0..n)
-        .map(|i| 2.0 * PI * (i as f64) / (n as f64))
+        .map(|i| (2.0 * PI * (i as f64) / (n as f64)).cos())
         .collect::<Vec<f64>>();
     let v_0_i = (0..n).map(|_| 0.0).collect::<Vec<f64>>();
     let a_0_i = a(&x_0_i);
@@ -82,13 +82,13 @@ fn hw9_question1() -> () {
                 .enumerate()
                 .map(|(i, x)| x + v_i[i] * dt + 0.5 * a_i[i] * dt * dt)
                 .collect::<Vec<f64>>();
-            let an_i = a(x_i);
+            let anp1_i = a(x_i);
             *v_i = v_i
                 .iter()
                 .enumerate()
-                .map(|(i, v)| v + 0.5 * (a_i[i] + an_i[i]) * dt)
+                .map(|(i, v)| v + 0.5 * (a_i[i] + anp1_i[i]) * dt)
                 .collect::<Vec<f64>>();
-            *a_i = an_i;
+            *a_i = anp1_i;
             Some((x_i.clone(), v_i.clone()))
         })
         .unzip::<Vec<f64>, Vec<f64>, Vec<Vec<f64>>, Vec<Vec<f64>>>();
