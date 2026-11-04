@@ -2,9 +2,9 @@ use dataio::dataio::{FileDataType, publish_matlab_script, write_data_to_file};
 use rand::rngs::ThreadRng;
 use std::time::Instant;
 
-const PATHS: [&str; 1] = [
+const PATHS: [&str; 2] = [
     "output\\output_hw10\\u_x_t.json",
-    // "output\\output_hw10\\recurrence.json",
+    "output\\output_hw10\\u_0_t.json",
 ];
 
 pub fn homework10(_rng: &mut ThreadRng) -> () {
@@ -12,8 +12,8 @@ pub fn homework10(_rng: &mut ThreadRng) -> () {
     println!("Homework 10 start!");
 
     let run_hw10question1 = true;
-    let run_hw10question2 = true;
-    let run_hw10matlab = true;
+    let run_hw10question2 = false;
+    let run_hw10matlab = false;
 
     if run_hw10question1 {
         hw10_question1();
@@ -59,6 +59,8 @@ fn hw10_question1() -> () {
     let w = 10.0;
     let u_x_0 = |x: f64| (-x * x / (w * w)).exp();
 
+    let mut u_0_t = Vec::<f64>::with_capacity(t_num + 1);
+
     let a = -r / 2.0;
     let b = 1.0 + r;
     let c = -r / 2.0;
@@ -85,6 +87,7 @@ fn hw10_question1() -> () {
                     .collect::<Vec<f64>>();
                 thomas_algorithm(a, b, c, &d_j)
             };
+            u_0_t.push(u_j[0]);
             Some(if times.contains(t) {
                 Some((*u_j).clone())
             } else {
@@ -95,6 +98,7 @@ fn hw10_question1() -> () {
         .collect::<Vec<Vec<f64>>>();
 
     write_data_to_file(&u_x_t, PATHS[0], FileDataType::Json);
+    write_data_to_file(&u_0_t, PATHS[1], FileDataType::Json);
 
     let hw10q1_duration = hw10q1_start.elapsed();
     println!(
