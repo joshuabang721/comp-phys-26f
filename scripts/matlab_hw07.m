@@ -1,6 +1,11 @@
-%%  Homework 7
-function matlab_hw7(pathstr)
+%%  Homework 07
+
+%   GitHub: https://github.com/joshuabang721/comp-phys-26f
+
+function matlab_hw07(pathstr)
+
 paths = string(jsondecode(fileread(pathstr)));
+
 %%  Problem 1: Simple harmonic oscillator.
 
 %   Trajectory.

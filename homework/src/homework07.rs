@@ -1,4 +1,4 @@
-use crate::homework7::hw7_question2::Vector3;
+use crate::homework07::hw7_question2::Vector3;
 use dataio::dataio::{FileDataType, publish_matlab_script, write_data_to_file};
 use rand::rngs::ThreadRng;
 use std::{array, ops, time::Instant};

@@ -1,7 +1,7 @@
 use homework::{
-    homework1::homework1, homework2::homework2, homework3::homework3, homework4::homework4,
-    homework5::homework5, homework6::homework6, homework7::homework7, homework8::homework8,
-    homework9::homework9,
+    homework01::homework1, homework02::homework2, homework03::homework3, homework04::homework4,
+    homework05::homework5, homework06::homework6, homework07::homework7, homework08::homework8,
+    homework09::homework09, homework10::homework10,
 };
 use rand::rngs::ThreadRng;
 use std::time::Instant;
@@ -11,42 +11,46 @@ fn main() -> () {
     let hw_start = Instant::now();
     println!("Homework start!");
 
-    let run_homework1 = false;
-    let run_homework2 = false;
-    let run_homework3 = false;
-    let run_homework4 = false;
-    let run_homework5 = false;
-    let run_homework6 = false;
-    let run_homework7 = false;
-    let run_homework8 = false;
-    let run_homework9 = true;
+    let run_homework01 = false;
+    let run_homework02 = false;
+    let run_homework03 = false;
+    let run_homework04 = false;
+    let run_homework05 = false;
+    let run_homework06 = false;
+    let run_homework07 = false;
+    let run_homework08 = false;
+    let run_homework09 = false;
+    let run_homework10 = true;
 
-    if run_homework1 {
+    if run_homework01 {
         homework1(&mut rng);
     }
-    if run_homework2 {
+    if run_homework02 {
         homework2(&mut rng);
     }
-    if run_homework3 {
+    if run_homework03 {
         homework3(&mut rng);
     }
-    if run_homework4 {
+    if run_homework04 {
         homework4(&mut rng);
     }
-    if run_homework5 {
+    if run_homework05 {
         homework5(&mut rng);
     }
-    if run_homework6 {
+    if run_homework06 {
         homework6(&mut rng);
     }
-    if run_homework7 {
+    if run_homework07 {
         homework7(&mut rng);
     }
-    if run_homework8 {
+    if run_homework08 {
         homework8(&mut rng);
     }
-    if run_homework9 {
-        homework9(&mut rng);
+    if run_homework09 {
+        homework09(&mut rng);
+    }
+    if run_homework10 {
+        homework10(&mut rng);
     }
 
     let hw_duration = hw_start.elapsed();

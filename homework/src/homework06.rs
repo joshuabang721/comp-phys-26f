@@ -1,8 +1,47 @@
+use dataio::dataio::publish_matlab_script;
 use rand::rngs::ThreadRng;
+use std::time::Instant;
 
-pub fn homework6(_rng: &mut ThreadRng) -> () {}
+const PATHS: [&str; 2] = [
+    "output\\output_hw9\\time.json",
+    "output\\output_hw9\\recurrence.json",
+];
 
-fn _hw6_question1(_rng: &mut ThreadRng) -> () {}
+pub fn homework6(rng: &mut ThreadRng) -> () {
+    let hw6_start = Instant::now();
+    println!("Homework 6 start!");
+
+    let run_hw6question1 = true;
+    let run_hw6question2 = true;
+    let run_hw6matlab = true;
+
+    if run_hw6question1 {
+        hw6_question1(rng);
+    }
+    // if run_hw6question2 {
+    //     hw6_question2();
+    // }
+    if run_hw6matlab {
+        publish_matlab_script(
+            "scripts\\matlab_hw6.m",
+            "matlab_hw6",
+            "output\\output_hw6\\hw6_document.pdf",
+            PATHS.to_vec(),
+        );
+    }
+
+    let hw6_duration = hw6_start.elapsed();
+    println!("Homework 6 finish! Time elapsed: {:?}", hw6_duration);
+}
+
+fn hw6_question1(_rng: &mut ThreadRng) -> () {
+    let j_i_j = hebbian_interaction_j_i_j;
+    let e = energy_e;
+    let h_i = local_field_h_i;
+    let p_i = glauber_update_p_i;
+    let m1 = retrieval_overlap_m1;
+    let avgmbar = late_time_average_avgmbar;
+}
 
 fn hebbian_interaction_j_i_j(memory_x_mu_i: Vec<Vec<f64>>, n: usize) -> Vec<Vec<f64>> {
     let x_mu_i = memory_x_mu_i;

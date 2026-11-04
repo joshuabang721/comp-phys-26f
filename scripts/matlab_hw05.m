@@ -1,8 +1,8 @@
-%%  Homework 5
+%%  Homework 05
 
 %   GitHub: https://github.com/joshuabang721/comp-phys-26f
 
-function matlab_hw5(pathstr)
+function matlab_hw05(pathstr)
 
 paths = string(jsondecode(fileread(pathstr)));
 
