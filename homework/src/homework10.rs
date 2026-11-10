@@ -2,7 +2,9 @@ use dataio::dataio::{FileDataType, publish_matlab_script, write_data_to_file};
 use rand::rngs::ThreadRng;
 use std::time::Instant;
 
-const PATHS: [&str; 2] = [
+const PATHS: [&str; 4] = [
+    "output\\output_hw10\\x_j.json",
+    "output\\output_hw10\\t_n.json",
     "output\\output_hw10\\u_x_t.json",
     "output\\output_hw10\\u_0_t.json",
 ];
@@ -11,9 +13,9 @@ pub fn homework10(_rng: &mut ThreadRng) -> () {
     let hw10_start = Instant::now();
     println!("Homework 10 start!");
 
-    let run_hw10question1 = true;
+    let run_hw10question1 = false;
     let run_hw10question2 = false;
-    let run_hw10matlab = false;
+    let run_hw10matlab = true;
 
     if run_hw10question1 {
         hw10_question1();
@@ -60,6 +62,7 @@ fn hw10_question1() -> () {
     let u_x_0 = |x: f64| (-x * x / (w * w)).exp();
 
     let mut u_0_t = Vec::<f64>::with_capacity(t_num + 1);
+    let j_x0 = x_j.iter().position(|&x| x == 0.0).unwrap();
 
     let a = -r / 2.0;
     let b = 1.0 + r;
@@ -87,7 +90,7 @@ fn hw10_question1() -> () {
                     .collect::<Vec<f64>>();
                 thomas_algorithm(a, b, c, &d_j)
             };
-            u_0_t.push(u_j[0]);
+            u_0_t.push(u_j[j_x0]);
             Some(if times.contains(t) {
                 Some((*u_j).clone())
             } else {
@@ -97,8 +100,10 @@ fn hw10_question1() -> () {
         .flatten()
         .collect::<Vec<Vec<f64>>>();
 
-    write_data_to_file(&u_x_t, PATHS[0], FileDataType::Json);
-    write_data_to_file(&u_0_t, PATHS[1], FileDataType::Json);
+    write_data_to_file(&x_j, PATHS[0], FileDataType::Json);
+    write_data_to_file(&t_n, PATHS[1], FileDataType::Json);
+    write_data_to_file(&u_x_t, PATHS[2], FileDataType::Json);
+    write_data_to_file(&u_0_t, PATHS[3], FileDataType::Json);
 
     let hw10q1_duration = hw10q1_start.elapsed();
     println!(

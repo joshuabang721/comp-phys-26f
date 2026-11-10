@@ -16,11 +16,11 @@ fn main() -> () {
     let run_homework03 = false;
     let run_homework04 = false;
     let run_homework05 = false;
-    let run_homework06 = false;
+    let run_homework06 = true;
     let run_homework07 = false;
     let run_homework08 = false;
     let run_homework09 = false;
-    let run_homework10 = true;
+    let run_homework10 = false;
 
     if run_homework01 {
         homework1(&mut rng);
