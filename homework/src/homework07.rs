@@ -1,44 +1,55 @@
-use crate::homework07::hw7_question2::Vector3;
+use crate::homework07::hw07_inclass2::Vector3;
 use dataio::dataio::{FileDataType, publish_matlab_script, write_data_to_file};
 use rand::rngs::ThreadRng;
 use std::{array, ops, time::Instant};
 
 const PATHS: [&str; 12] = [
-    "output\\output_hw7\\harmonic_trajectory.json",
-    "output\\output_hw7\\harmonic_kinetic.json",
-    "output\\output_hw7\\harmonic_potential.json",
-    "output\\output_hw7\\harmonic_energy.json",
-    "output\\output_hw7\\harmonic_error.json",
-    "output\\output_hw7\\chain_x1.json",
-    "output\\output_hw7\\chain_x2.json",
-    "output\\output_hw7\\chain_x3.json",
-    "output\\output_hw7\\chain_kinetic.json",
-    "output\\output_hw7\\chain_potential.json",
-    "output\\output_hw7\\chain_total.json",
-    "output\\output_hw7\\chain_error.json",
+    "output\\output_hw07\\harmonic_trajectory.json",
+    "output\\output_hw07\\harmonic_kinetic.json",
+    "output\\output_hw07\\harmonic_potential.json",
+    "output\\output_hw07\\harmonic_energy.json",
+    "output\\output_hw07\\harmonic_error.json",
+    "output\\output_hw07\\chain_x1.json",
+    "output\\output_hw07\\chain_x2.json",
+    "output\\output_hw07\\chain_x3.json",
+    "output\\output_hw07\\chain_kinetic.json",
+    "output\\output_hw07\\chain_potential.json",
+    "output\\output_hw07\\chain_total.json",
+    "output\\output_hw07\\chain_error.json",
 ];
 
-pub fn homework7(_rng: &mut ThreadRng) -> () {
-    let hw7_start = Instant::now();
-    println!("Homework 7 start!");
+pub fn homework07(_rng: &mut ThreadRng) -> () {
+    let hw07_start = Instant::now();
+    println!("Homework 07 start!");
 
-    hw7_question1();
-    hw7_question2();
+    let run_hw07inclass1 = false;
+    let run_hw07inclass2 = false;
+    let run_hw07question1 = false;
+    let run_hw07question2 = false;
+    let run_hw07matlab = false;
 
-    publish_matlab_script(
-        "scripts\\matlab_hw7.m",
-        "matlab_hw7",
-        "output\\output_hw7\\hw7_document.pdf",
-        PATHS.to_vec(),
-    );
+    if run_hw07inclass1 {
+        hw07_inclass1();
+    }
+    if run_hw07inclass2 {
+        hw07_inclass2();
+    }
+    if run_hw07matlab {
+        publish_matlab_script(
+            "scripts\\matlab_hw07.m",
+            "matlab_hw07",
+            "output\\output_hw07\\hw07_document.pdf",
+            PATHS.to_vec(),
+        );
+    }
 
-    let hw7_duration = hw7_start.elapsed();
-    println!("Homework 7 finish! Time elapsed: {:?}", hw7_duration);
+    let hw07_duration = hw07_start.elapsed();
+    println!("Homework 07 finish! Time elapsed: {:?}", hw07_duration);
 }
 
-fn hw7_question1() -> () {
-    let hw7q1_start = Instant::now();
-    println!("Hw 7 question 1 start!");
+fn hw07_inclass1() -> () {
+    let hw07q1_start = Instant::now();
+    println!("Hw 07 question 1 start!");
 
     let m = 1.0;
     let k = 1.0;
@@ -76,13 +87,16 @@ fn hw7_question1() -> () {
 
     write_data_to_file(&error, PATHS[4], FileDataType::Json);
 
-    let hw7q1_duration = hw7q1_start.elapsed();
-    println!("Hw 7 question 1 finish! Time elapsed: {:?}", hw7q1_duration);
+    let hw07q1_duration = hw07q1_start.elapsed();
+    println!(
+        "Hw 07 question 1 finish! Time elapsed: {:?}",
+        hw07q1_duration
+    );
 }
 
-fn hw7_question2() -> () {
-    let hw7q2_start = Instant::now();
-    println!("Hw 7 question 2 start!");
+fn hw07_inclass2() -> () {
+    let hw07q2_start = Instant::now();
+    println!("Hw 07 question 2 start!");
 
     let m = 1.0;
     let k = 1.0;
@@ -122,7 +136,7 @@ fn hw7_question2() -> () {
 
     write_data_to_file(&x1, PATHS[5], FileDataType::Json);
     write_data_to_file(&x2, PATHS[6], FileDataType::Json);
-    write_data_to_file(&x3, PATHS[7], FileDataType::Json);
+    write_data_to_file(&x3, PATHS[07], FileDataType::Json);
 
     let e_k = |v: Vector3| 0.5 * m * (v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
     let e_p = |x: Vector3| {
@@ -151,11 +165,14 @@ fn hw7_question2() -> () {
 
     write_data_to_file(&error, PATHS[11], FileDataType::Json);
 
-    let hw7q2_duration = hw7q2_start.elapsed();
-    println!("Hw 7 question 2 finish! Time elapsed: {:?}", hw7q2_duration);
+    let hw07q2_duration = hw07q2_start.elapsed();
+    println!(
+        "Hw 07 question 2 finish! Time elapsed: {:?}",
+        hw07q2_duration
+    );
 }
 
-pub(super) mod hw7_question2 {
+pub(super) mod hw07_inclass2 {
     use std::ops;
 
     #[derive(Debug, Clone, Copy)]
@@ -203,21 +220,28 @@ where
     T: Clone + Copy + Default + ops::Add<Output = T> + ops::Mul<f64, Output = T>,
     F: Fn(T) -> T,
 {
-    let mut x_n = T::default();
-    let mut v_n = T::default();
-
     (0..=n_max)
-        .map(|n| {
-            (x_n, v_n) = if n == 0 {
-                (x0, v0)
-            } else {
-                let a_nm1 = a(x_n);
-                x_n = x_n + v_n * dt + a_nm1 * 0.5 * dt * dt;
-                let a_n = a(x_n);
-                v_n = v_n + (a_nm1 + a_n) * 0.5 * dt;
-                (x_n, v_n)
-            };
-            (x_n, v_n)
+        .scan((T::default(), T::default()), |(x_n, v_n), n| {
+            if n != 0 {
+                let a_nm1 = a(*x_n);
+                *x_n = *x_n + *v_n * dt + a_nm1 * 0.5 * dt * dt;
+                let a_n = a(*x_n);
+                *v_n = *v_n + (a_nm1 + a_n) * 0.5 * dt;
+            }
+            Some((*x_n, *v_n))
         })
         .unzip::<T, T, Vec<T>, Vec<T>>()
+}
+
+fn hw07_question1() -> () {
+    let hw07q1_start = Instant::now();
+    println!("Hw 07 question 1 start!");
+
+    // let accel = ||;
+
+    let hw07q1_duration = hw07q1_start.elapsed();
+    println!(
+        "Hw 07 question 1 finish! Time elapsed: {:?}",
+        hw07q1_duration
+    );
 }
