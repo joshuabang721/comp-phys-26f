@@ -5,6 +5,7 @@ pub mod homework04;
 pub mod homework05;
 pub mod homework06;
 pub mod homework07;
+pub mod homework07v2;
 pub mod homework08;
 pub mod homework09;
 pub mod homework10;

@@ -1,4 +1,4 @@
-use rand::{RngExt, rngs::ThreadRng};
+use rand::{rngs::ThreadRng, RngExt};
 use std::time::Instant;
 
 pub fn inclass_nov16(rng: &mut ThreadRng) -> () {
@@ -18,12 +18,33 @@ pub fn inclass_nov16(rng: &mut ThreadRng) -> () {
                 .cycle()
                 .skip(r)
                 .take(n)
-                .copied()
+                .map(|&sni| if rng.random_bool(p) { -sni } else { sni })
                 .collect::<Vec<i32>>()
         })
         .collect::<Vec<Vec<i32>>>();
+    let sbar_i = x_n_i
+        .iter()
+        .fold(vec![0.0; n], |mut sbar_i, xn_i| {
+            sbar_i
+                .iter_mut()
+                .zip(xn_i)
+                .for_each(|(sbar, &x)| *sbar += x as f64);
+            sbar_i
+        })
+        .into_iter()
+        .map(|s| s / (m as f64))
+        .collect::<Vec<f64>>();
+    let xc_n_i = x_n_i
+        .into_iter()
+        .map(|xn_i| {
+            xn_i.iter()
+                .enumerate()
+                .map(|(i, &xni)| (xni as f64) - sbar_i[i])
+                .collect::<Vec<f64>>()
+        })
+        .collect::<Vec<Vec<f64>>>();
 
-    let icnov16_duration = icnov16_start.elapsed();
+    let icnov16_duration: std::time::Duration = icnov16_start.elapsed();
     println!(
         "In class Nov 16 finish: Time elapsed: {:?}",
         icnov16_duration
